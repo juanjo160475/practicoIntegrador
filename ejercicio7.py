@@ -46,6 +46,11 @@ class Cuenta():
     def cantidad(self):
         return self.__cantidad   
     
+    @cantidad.setter
+    def cantidad(self,cant):
+        self.__cantidad=cant
+
+    
     def retirar(self,monto):
         if (monto>0):
             self.__cantidad = self.__cantidad - monto
@@ -100,6 +105,10 @@ class CuentaJoven(Cuenta):
         else:
             return print ("\nTitular no valido no puede extraer dinero")
         
+    def ingresar(self, monto):
+         super().ingresar(monto) 
+         self.cantidad = self.cantidad + (monto * (self.__bonificacion/100))
+         return print("",self.cantidad)   
 
     def mostrar(self):
          return f"Cuenta Joven:  {self.titular.nombre} {self.titular.apellido} \n Saldo: {self.cantidad} $ \n Bonificacion: {self.bonificacion}%"
@@ -116,7 +125,7 @@ cuenta1.retirar(-1)
 
 
 titular2 = Persona("jose", "Marrone",45)
-cuenta2 = CuentaJoven(titular2, 0.2)  
+cuenta2 = CuentaJoven(titular2, 20)  
 cuenta2.ingresar(500)
 cuenta2.retirar(100.30)
 cuenta2.ingresar(500)
